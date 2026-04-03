@@ -5,7 +5,7 @@ import Game from '../models/Game.js';
 import Pronunciation from '../models/Pronunciation.js';
 import Question from '../models/Question.js';
 
-const BASE_URL = 'http://localhost:5000/public';
+const BASE_URL = 'https://neuro-read-backend.vercel.app/public';
 
 const GAME_DEFINITIONS = [
 
