@@ -10,7 +10,7 @@ const connectDB = async () => {
     await mongoose.connect(env.mongoUri, {
       autoIndex: true
     });
-
+    isConnected = db.connections[0].readyState === 1;
     console.log('MongoDB connected successfully');
   } catch (error) {
     const details = error?.message || 'Unknown MongoDB connection error';
