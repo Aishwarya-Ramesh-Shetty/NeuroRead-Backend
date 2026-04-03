@@ -1,24 +1,28 @@
 import mongoose from 'mongoose';
 import env from './env.js';
+
 let isConnected = false;
+
 const connectDB = async () => {
-  if (isConnected) {
+  // Check if we are already connected (especially important for Vercel's reuse)
+  if (mongoose.connection.readyState === 1) {
     console.log("Using existing DB connection");
     return;
   }
+
   try {
-    await mongoose.connect(env.mongoUri, {
+    const conn = await mongoose.connect(env.mongoUri, {
       autoIndex: true
     });
-    isConnected = db.connections[0].readyState === 1;
+    
+    isConnected = conn.connections[0].readyState === 1;
     console.log('MongoDB connected successfully');
   } catch (error) {
     const details = error?.message || 'Unknown MongoDB connection error';
 
     if (/option\s+.+\s+is not supported/i.test(details)) {
       throw new Error(
-        `MongoDB connection failed: ${details}. Check MONGO_URI query parameters in backend/.env. ` +
-          'Your URI likely contains an invalid option key (for example a stray word after ? or &).'
+        `MongoDB connection failed: ${details}. Check MONGO_URI query parameters.`
       );
     }
 
