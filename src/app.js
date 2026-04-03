@@ -28,7 +28,12 @@ app.use('/public', express.static('public'));
 app.get('/health', (req, res) => {
   res.status(200).json({ success: true, message: 'Server healthy' });
 });
-
+app.get('/api', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'API is running 🚀'
+  });
+});
 app.use('/api', routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
