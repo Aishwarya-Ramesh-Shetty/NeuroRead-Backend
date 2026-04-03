@@ -8,7 +8,8 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.CORS_ORIGIN
+  process.env.CORS_ORIGIN,
+  "https://neuro-read-backend.vercel.app"
 ];
 
 app.use(
@@ -17,7 +18,7 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(null, false);
       }
     },
     credentials: true
