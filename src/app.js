@@ -3,6 +3,10 @@ import express from 'express';
 import env from './config/env.js';
 import routes from './routes/index.js';
 import { errorHandler, notFoundHandler } from './middlewares/errorMiddleware.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
 
 const app = express();
 
@@ -25,7 +29,10 @@ app.use(
   })
 );
 app.use(express.json({ limit: '1mb' }));
-app.use('/public', express.static('public'));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Change your static middleware to this:
+app.use('/public', express.static(path.join(process.cwd(), 'public')));
 app.get('/health', (req, res) => {
   res.status(200).json({ success: true, message: 'Server healthy' });
 });
