@@ -6,9 +6,20 @@ import { errorHandler, notFoundHandler } from './middlewares/errorMiddleware.js'
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CORS_ORIGIN
+];
+
 app.use(
   cors({
-    origin: env.corsOrigin,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true
   })
 );
