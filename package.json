@@ -6,10 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node server",
+    "start": "node src/server.js",
     "lint": "echo 'No lint config yet'",
-    "seed": "node src/seed/seedGamesAndQuestions.js",
-    "vercel-start":"node server.js"
+    "seed": "node src/seed/seedGamesAndQuestions.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
