@@ -12,9 +12,10 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.CORS_ORIGIN,
-  "https://neuro-read-backend.vercel.app"
-];
+  "http://localhost:5174",
+  "https://neuro-read-frontend.vercel.app",
+  process.env.CORS_ORIGIN
+].filter(Boolean);
 
 app.use(
   cors({
